@@ -12,31 +12,24 @@ class Questions {
         choices: [
           'View',
           'Add',
-          'Update'
+          'Update',
+          'Quit'
         ],
-        name: 'task'
+        name: 'task',
+        askAnswered: true
       },  
       {
         type: 'list',
-        message: 'What do you want to view: ',
+        message: 'Choose: ',
         choices: [
           'Employees',
           'Departments',
           'Roles',
+          
         ],
-        name: 'view',
-        when: (answers) => answers.task === 'View'
-      },  
-      {
-        type: 'list',
-        message: 'What do you want to add: ',
-        choices: [
-          'Employee',
-          'Department',
-          'Role'
-        ],
-        name: 'add',
-        when: (answers) => answers.task === 'Add'
+        name: 'table',
+        askAnswered: true,
+        when: (answers) => answers.task === 'View' || answers.task === 'Add'
       },  
       {
         type: 'list',
@@ -47,25 +40,30 @@ class Questions {
           'Role'
         ],
         name: 'update',
+        askAnswered: true,
         when: (answers) => answers.task === 'Update'
       },  
       {
         type: 'confirm',
         message: 'Would you like to quit? ',
         name: 'quit',
-        default: false
+        default: false,
+        askAnswered: true,
+        when: (answers) => answers.task === 'Quit'
       }
     ];
   }
 
   #collectInputs = async (inputs = []) => {
-    const { repeat, ...answers } = await prompt(this.questions);
+    const { quit, ...answers } = await prompt(this.questions);
     const newInputs = [...inputs, answers];
-    return repeat ? this.#collectInputs(newInputs) : newInputs;
+    return quit ? this.#collectInputs(newInputs) : newInputs;
   };
 
-  async getResponse() {
+  async startQuestions() {
     this.response = await this.#collectInputs();
+    console.log('this.response: ', this.response);
+
     return this.response;
   };
 

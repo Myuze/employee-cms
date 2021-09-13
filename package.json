@@ -2,13 +2,13 @@
   "name": "employee-cms",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node cms.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Myuze/employee-cms#readme",
   "dependencies": {
     "console.table": "^0.10.0",
+    "inquirer": "^8.1.2",
     "mysql2": "^2.3.0"
   }
 }
