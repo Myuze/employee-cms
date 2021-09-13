@@ -1,4 +1,4 @@
-  // Prompt for Team Member data recursively using Inquirer as they confirm to add members
+// Prompt user Options
 const inquirer = require('inquirer');
 const prompt = inquirer.createPromptModule();
 
@@ -7,48 +7,52 @@ class Questions {
     this.response;
     this.questions = [
       {
-        type: 'input',
-        message: 'Enter a Team Member name: ',
-        name: 'memberName'
-      },  
-      {
-        type: 'input',
-        message: 'Enter Employee ID: ',
-        name: 'id'
-      },  
-      {
-        type: 'input',
-        message: 'Enter Employee Email Address: ',
-        name: 'email'
+        type: 'list',
+        message: 'Select an Option: ',
+        choices: [
+          'View',
+          'Add',
+          'Update'
+        ],
+        name: 'task'
       },  
       {
         type: 'list',
-        message: 'Select a Role: ',
-        choices: ['Manager', 'Engineer', 'Intern'],
-        name: 'role'
-      },
+        message: 'What do you want to view: ',
+        choices: [
+          'Employees',
+          'Departments',
+          'Roles',
+        ],
+        name: 'view',
+        when: (answers) => answers.task === 'View'
+      },  
       {
-        type: 'input',
-        message: 'Enter Office Number: ',
-        when: (answers) => answers.role === 'Manager',
-        name: 'officeNum'
-      },
+        type: 'list',
+        message: 'What do you want to add: ',
+        choices: [
+          'Employee',
+          'Department',
+          'Role'
+        ],
+        name: 'add',
+        when: (answers) => answers.task === 'Add'
+      },  
       {
-        type: 'input',
-        message: 'Enter Github Username: ',
-        when: (answers) => answers.role === 'Engineer',
-        name: 'github'
-      },
-      {
-        type: 'input',
-        message: 'Enter School Attended: ',
-        when: (answers) => answers.role === 'Intern',
-        name: 'school'
-      },
+        type: 'list',
+        message: 'What do you want to update: ',
+        choices: [
+          'Employee',
+          'Department',
+          'Role'
+        ],
+        name: 'update',
+        when: (answers) => answers.task === 'Update'
+      },  
       {
         type: 'confirm',
-        message: 'Would you like to add another Team Member? ',
-        name: 'repeat',
+        message: 'Would you like to quit? ',
+        name: 'quit',
         default: false
       }
     ];
