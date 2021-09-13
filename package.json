@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Myuze/employee-cms#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
     "express": "^4.17.1",
     "mysql2": "^2.3.0",
     "nanoid": "^3.1.25",
