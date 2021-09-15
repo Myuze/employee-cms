@@ -21,7 +21,7 @@ async function processResponse(response) {
   const task = response.task.toLowerCase().split(' ').shift();
   let table = response.task.toLowerCase().split(' ').pop();
 
-  if (table.endsWith('s')) table.slice(0, -1);
+  if (table.endsWith('s')) table = table.slice(0, -1);
 
   let params = ``;
   const employee = '(id, first_name, last_name, role_id, manager_id)';
@@ -44,7 +44,7 @@ async function processResponse(response) {
 
   switch (task) {
     case 'add':
-      db.query(`INSERT INTO ${table} ${params} VALUES ?`, (err, result) => {
+      db.query(`INSERT INTO ${table} ${params} VALUES ?`, response, (err, result) => {
         console.table('\n', response.table, result);
       });
       break;

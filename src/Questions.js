@@ -18,7 +18,8 @@ class Questions {
           'View All Departments',
           'Add a Department',
           'View All Roles',
-          'Add a Role'
+          'Add a Role',
+          'Quit'
         ],
         name: 'task',
         loop: true,
