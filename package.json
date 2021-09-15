@@ -25,5 +25,8 @@
     "console.table": "^0.10.0",
     "inquirer": "^8.1.2",
     "mysql2": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^27.2.0"
   }
 }
