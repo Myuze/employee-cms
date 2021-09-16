@@ -1,17 +1,14 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// Local DB Credentials
-const pass = require('../password');
-
-// Environment Variables
-const PASS = process.env.DB_PASS || pass;
+const processEmployee = require('../lib/parseEmployee');
 
 const db = mysql.createConnection(
   {
-    host: 'localhost',
-    user: 'root',
-    password: PASS,
-    database: 'cms_db'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB
   },
   console.log(`\nConnected to the cms_db database`)
 );

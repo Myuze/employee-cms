@@ -64,7 +64,7 @@ class Questions {
       {
         type: 'input',
         message: 'Employee Role?',
-        name: 'employeeRole',
+        name: 'role',
         when: (answers) => answers.task === 'Add an Employee'
       },
       {
@@ -72,7 +72,9 @@ class Questions {
         message: 'Employee Manager?',
         name: 'employeeManager',
         when: (answers) => answers.task === 'Add an Employee'
-      },
+      }
+    ];
+    this.confirm = [
       {
         type: 'confirm',
         message: 'Would you like to quit? ',
@@ -89,10 +91,11 @@ async startQuestions() {
     if (answers.quit) {
       process.exit(0);
     } else {
-      await this.startQuestions();
-      processResponse(answers).catch((err) => console.log(err))
-    }
-  });
+      this.startQuestions().then(async (answers) => {
+       await processResponse(answers).catch((err) => console.log(err))
+      });
+    };
+  }).catch((err) => err ? console.log(err): console.log('SUCCESS'));
 
     return this.response;
   };
